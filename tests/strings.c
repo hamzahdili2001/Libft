@@ -68,6 +68,22 @@ int	test_ft_strcat(char *s1, char *s2)
 	return (1);
 }
 
+int	same_sign(int a, int b)
+{
+	if (a == 0 && b == 0)
+		return (1);
+	if (a > 0 && b > 0)
+		return (1);
+	if (a < 0 && b < 0)
+		return (1);
+	return (0);
+}
+
+int	test_ft_strcmp(char *s1, char *s2)
+{
+	return (same_sign(ft_strcmp(s1, s2), strcmp(s1, s2)));
+}
+
 int	main(void)
 {
 	/* ft_strlen */
@@ -82,8 +98,14 @@ int	main(void)
 	test("ft_strncpy -> n == 0", test_ft_strncpy("hello", 0));
 	test("ft_strncpy -> exact len", test_ft_strncpy("abc", 3));
 	/* ft_strcat */
-	test("ft_strcat -> basic", test_ft_strcat("hello ", "world"));
-	test("ft_strcat -> empty src", test_ft_strcat("hello", ""));
-	test("ft_strcat -> empty dest", test_ft_strcat("", "world"));
+	test("ft_strcat  -> basic", test_ft_strcat("hello ", "world"));
+	test("ft_strcat  -> empty src", test_ft_strcat("hello", ""));
+	test("ft_strcat  -> empty dest", test_ft_strcat("", "world"));
+	/* ft_strcmp */
+	test("ft_strcmp -> prefix shorter", test_ft_strcmp("hi", "hello"));
+	test("ft_strcmp -> prefix longer", test_ft_strcmp("hello", "hi"));
+	test("ft_strcmp -> equal", test_ft_strcmp("hello", "hello"));
+	test("ft_strcmp -> s1 < s2", test_ft_strcmp("abc", "abd"));
+	test("ft_strcmp -> s1 > s2", test_ft_strcmp("abd", "abc"));
 	return (0);
 }
