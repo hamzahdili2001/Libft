@@ -1,0 +1,12 @@
+# Builds
+obj/
+*.o
+*.a
+ 
+# Test binary
+run_tests
+ 
+# Crashed tests
+core
+*.core
+ 
