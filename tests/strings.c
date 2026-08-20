@@ -92,27 +92,33 @@ int	test_ft_strncmp(char *s1, char *s2, t_uint n)
 int	main(void)
 {
 	/* ft_strlen */
+	ft_putstr(" TEST: [ft_strlen]\n");
 	test("ft_strlen  -> empty", ft_strlen("") == strlen(""));
 	test("ft_strlen  -> str", ft_strlen("hello") == strlen("hello"));
 	/* ft_strcpy */
+	ft_putstr(" TEST: [ft_strcpy]\n");
 	test("ft_strcpy  -> empty ", test_ft_strcpy(""));
 	test("ft_strcpy  -> str ", test_ft_strcpy("this is a test"));
 	/* ft_strncpy */
+	ft_putstr(" TEST: [ft_strncpy]\n");
 	test("ft_strncpy -> src short", test_ft_strncpy("hi", 10));
 	test("ft_strncpy -> src long", test_ft_strncpy("hello world", 5));
 	test("ft_strncpy -> n == 0", test_ft_strncpy("hello", 0));
 	test("ft_strncpy -> exact len", test_ft_strncpy("abc", 3));
 	/* ft_strcat */
+	ft_putstr(" TEST: [ft_strcat]\n");
 	test("ft_strcat  -> basic", test_ft_strcat("hello ", "world"));
 	test("ft_strcat  -> empty src", test_ft_strcat("hello", ""));
 	test("ft_strcat  -> empty dest", test_ft_strcat("", "world"));
 	/* ft_strcmp */
+	ft_putstr(" TEST: [ft_strcmp]\n");
 	test("ft_strcmp -> prefix shorter", test_ft_strcmp("hi", "hello"));
 	test("ft_strcmp -> prefix longer", test_ft_strcmp("hello", "hi"));
 	test("ft_strcmp -> equal", test_ft_strcmp("hello", "hello"));
 	test("ft_strcmp -> s1 < s2", test_ft_strcmp("abc", "abd"));
 	test("ft_strcmp -> s1 > s2", test_ft_strcmp("abd", "abc"));
 	/* ft_strncmp */
+	ft_putstr(" TEST: [ft_strncmp]\n");
 	test("ft_strncmp -> equal, full compare", test_ft_strncmp("hello", "hello",
 			5));
 	test("ft_strncmp -> equal, n larger than strings", test_ft_strncmp("hi",
@@ -126,5 +132,27 @@ int	main(void)
 	test("ft_strncmp -> s1 shorter than n", test_ft_strncmp("hi", "hello", 5));
 	test("ft_strncmp -> s2 shorter than n", test_ft_strncmp("hello", "hi", 5));
 	test("ft_strncmp -> n == 1", test_ft_strncmp("apple", "avocado", 1));
+	/* strchr */
+	ft_putstr(" TEST: [ft_strchr]\n");
+	test("ft_strchr -> found first char", ft_strchr("hello",
+			'h') == strchr("hello", 'h'));
+	test("ft_strchr -> found middle char", ft_strchr("hello",
+			'l') == strchr("hello", 'l'));
+	test("ft_strchr -> found last char", ft_strchr("hello",
+			'o') == strchr("hello", 'o'));
+	test("ft_strchr -> not found", ft_strchr("hello", 'z') == strchr("hello",
+			'z'));
+	test("ft_strchr -> find null terminator", ft_strchr("hello",
+			'\0') == strchr("hello", '\0'));
+	test("ft_strchr -> empty string, char not present", ft_strchr("",
+			'a') == strchr("", 'a'));
+	test("ft_strchr -> empty string, find null", ft_strchr("",
+			'\0') == strchr("", '\0'));
+	test("ft_strchr -> repeated char, finds first occurrence",
+		ft_strchr("banana", 'a') == strchr("banana", 'a'));
+	test("ft_strchr -> single character string, match", ft_strchr("x",
+			'x') == strchr("x", 'x'));
+	test("ft_strchr -> single character string, no match", ft_strchr("x",
+			'y') == strchr("x", 'y'));
 	return (0);
 }
