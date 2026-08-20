@@ -84,6 +84,11 @@ int	test_ft_strcmp(char *s1, char *s2)
 	return (same_sign(ft_strcmp(s1, s2), strcmp(s1, s2)));
 }
 
+int	test_ft_strncmp(char *s1, char *s2, t_uint n)
+{
+	return (same_sign(ft_strncmp(s1, s2, n), strncmp(s1, s2, n)));
+}
+
 int	main(void)
 {
 	/* ft_strlen */
@@ -107,5 +112,19 @@ int	main(void)
 	test("ft_strcmp -> equal", test_ft_strcmp("hello", "hello"));
 	test("ft_strcmp -> s1 < s2", test_ft_strcmp("abc", "abd"));
 	test("ft_strcmp -> s1 > s2", test_ft_strcmp("abd", "abc"));
+	/* ft_strncmp */
+	test("ft_strncmp -> equal, full compare", test_ft_strncmp("hello", "hello",
+			5));
+	test("ft_strncmp -> equal, n larger than strings", test_ft_strncmp("hi",
+			"hi", 100));
+	test("ft_strncmp -> equal within n, differ after", test_ft_strncmp("hello",
+			"help", 3));
+	test("ft_strncmp -> differ within n", test_ft_strncmp("hello", "help", 4));
+	test("ft_strncmp -> n == 0", test_ft_strncmp("abc", "xyz", 0));
+	test("ft_strncmp -> n == 0, one empty", test_ft_strncmp("", "xyz", 0));
+	test("ft_strncmp -> both empty", test_ft_strncmp("", "", 5));
+	test("ft_strncmp -> s1 shorter than n", test_ft_strncmp("hi", "hello", 5));
+	test("ft_strncmp -> s2 shorter than n", test_ft_strncmp("hello", "hi", 5));
+	test("ft_strncmp -> n == 1", test_ft_strncmp("apple", "avocado", 1));
 	return (0);
 }
