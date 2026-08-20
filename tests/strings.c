@@ -1,6 +1,5 @@
 #include "libft.h"
 #include <assert.h>
-#include <stdio.h>
 #include <string.h>
 
 void	test(char *name, int passed)
@@ -154,5 +153,21 @@ int	main(void)
 			'x') == strchr("x", 'x'));
 	test("ft_strchr -> single character string, no match", ft_strchr("x",
 			'y') == strchr("x", 'y'));
+	/* strrchr */
+	ft_putstr(" TEST: [ft_strrchr]\n");
+	test("ft_strrchr -> found, single occurrence", ft_strrchr("hello",
+			'h') == strrchr("hello", 'h'));
+	test("ft_strrchr -> found, multiple occurrences", ft_strrchr("banana",
+			'a') == strrchr("banana", 'a'));
+	test("ft_strrchr -> not found", ft_strrchr("hello", 'z') == strrchr("hello",
+			'z'));
+	test("ft_strrchr -> find null terminator", ft_strrchr("hello",
+			'\0') == strrchr("hello", '\0'));
+	test("ft_strrchr -> empty string, char not present", ft_strrchr("",
+			'a') == strrchr("", 'a'));
+	test("ft_strrchr -> empty string, find null", ft_strrchr("",
+			'\0') == strrchr("", '\0'));
+	test("ft_strrchr -> last char in string", ft_strrchr("hello",
+			'o') == strrchr("hello", 'o'));
 	return (0);
 }

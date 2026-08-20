@@ -12,4 +12,5 @@ char					*ft_strcpy(char *dest, const char *src);
 char					*ft_strncpy(char *dest, const char *src, t_uint n);
 char					*ft_strcat(char *dest, const char *src);
 char					*ft_strchr(const char *s, int c);
+char					*ft_strrchr(const char *s, int c);
 #endif
