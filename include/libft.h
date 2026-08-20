@@ -8,4 +8,5 @@ int						ft_putchar(char c);
 void					ft_putstr(char *str);
 char					*ft_strcpy(char *dest, const char *src);
 char					*ft_strncpy(char *dest, const char *src, t_uint n);
+char					*ft_strcat(char *dest, const char *src);
 #endif
