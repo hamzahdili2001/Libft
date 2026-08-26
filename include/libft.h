@@ -1,6 +1,6 @@
 #ifndef LIBFT_H
 # define LIBFT_H
-
+# include <stdlib.h>
 typedef unsigned int	t_uint;
 
 t_uint					ft_strlen(char *str);
@@ -13,4 +13,5 @@ char					*ft_strncpy(char *dest, const char *src, t_uint n);
 char					*ft_strcat(char *dest, const char *src);
 char					*ft_strchr(const char *s, int c);
 char					*ft_strrchr(const char *s, int c);
+char					*ft_strstr(char *haystack, char *needle);
 #endif

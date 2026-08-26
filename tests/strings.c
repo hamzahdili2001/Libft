@@ -169,5 +169,22 @@ int	main(void)
 			'\0') == strrchr("", '\0'));
 	test("ft_strrchr -> last char in string", ft_strrchr("hello",
 			'o') == strrchr("hello", 'o'));
+	/* ft_strstr */
+	ft_putstr(" TEST: [ft_strstr]\n");
+	test("ft_strstr -> found at start", ft_strstr("hello world",
+			"hello") == strstr("hello world", "hello"));
+	test("ft_strstr -> found in middle", ft_strstr("hello world",
+			"wor") == strstr("hello world", "wor"));
+	test("ft_strstr -> not found", ft_strstr("hello world",
+			"xyz") == strstr("hello world", "xyz"));
+	test("ft_strstr -> needle longer than haystack", ft_strstr("hi",
+			"hello") == strstr("hi", "hello"));
+	test("ft_strstr -> empty needle, non-empty haystack", ft_strstr("hello",
+			"") == strstr("hello", ""));
+	test("ft_strstr -> empty haystack, non-empty needle", ft_strstr("",
+			"hi") == strstr("", "hi"));
+	test("ft_strstr -> both empty", ft_strstr("", "") == strstr("", ""));
+	test("ft_strstr -> needle equals haystack", ft_strstr("test",
+			"test") == strstr("test", "test"));
 	return (0);
 }
