@@ -172,6 +172,58 @@ int	test_ft_memmove_no_overlap(void)
 	return (memcmp(buf1, buf2, 20) == 0);
 }
 
+int	test_ft_memccpy(char *content, int c, size_t n)
+{
+	char	buff_1[100];
+	char	buff_2[100];
+	void	*ret1;
+	void	*ret2;
+
+	memset(buff_1, 'Z', 100);
+	memset(buff_2, 'Z', 100);
+	ret1 = ft_memccpy(buff_1, content, c, n);
+	ret2 = memccpy(buff_2, content, c, n);
+	if (memcmp(buff_1, buff_2, 100) != 0)
+		return (0);
+	if ((ret1 == NULL) != (ret2 == NULL))
+		return (0);
+	if (ret1 != NULL && (unsigned char *)ret1
+		- (unsigned char *)buff_1 != (unsigned char *)ret2
+		- (unsigned char *)buff_2)
+		return (0);
+	return (1);
+}
+
+int	test_ft_bzero(char *content, size_t n)
+{
+	char	buff_1[100];
+	char	buff_2[100];
+
+	memset(buff_1, 'Z', 100);
+	memset(buff_2, 'Z', 100);
+	strcpy(buff_1, content);
+	strcpy(buff_2, content);
+	ft_bzero(buff_1, n);
+	bzero(buff_2, n);
+	return (memcmp(buff_1, buff_2, 100) == 0);
+}
+
+int	test_ft_strdup(char *s)
+{
+	char	*ret1;
+	char	*ret2;
+	int		result;
+
+	ret1 = ft_strdup(s);
+	ret2 = strdup(s);
+	if (ret1 == NULL || ret2 == NULL)
+		return (ret1 == NULL && ret2 == NULL);
+	result = (strcmp(ret1, ret2) == 0) && (ret1 != s);
+	free(ret1);
+	free(ret2);
+	return (result);
+}
+
 int	main(void)
 {
 	/* ft_strlen */
@@ -316,5 +368,25 @@ int	main(void)
 			'h', 0));
 	test("ft_memchr -> find embedded null byte", ft_memchr("ab\0cd", '\0',
 			5) == memchr("ab\0cd", '\0', 5));
+	/*ft_memccpy */
+	ft_putstr(" TEST: [ft_memccpy]\n");
+	test("ft_memccpy -> c found mid-copy", test_ft_memccpy("hello world", 'w',
+			20));
+	test("ft_memccpy -> c not found within n", test_ft_memccpy("hello", 'z',
+			5));
+	test("ft_memccpy -> c found at last allowed byte", test_ft_memccpy("hello",
+			'o', 5));
+	test("ft_memccpy -> n == 0", test_ft_memccpy("hello", 'h', 0));
+	/* ft_bzero */
+	ft_putstr(" TEST: [ft_bzero]\n");
+	test("ft_bzero -> basic", test_ft_bzero("hello world", 5));
+	test("ft_bzero -> n == 0", test_ft_bzero("hello", 0));
+	test("ft_bzero -> n larger than content", test_ft_bzero("hi", 20));
+	test("ft_bzero -> whole buffer", test_ft_bzero("hello", 5));
+	/*ft_strdub*/
+	ft_putstr(" TEST: [ft_strdub]\n");
+	test("ft_strdup -> basic", test_ft_strdup("hello world"));
+	test("ft_strdup -> empty string", test_ft_strdup(""));
+	test("ft_strdup -> single char", test_ft_strdup("x"));
 	return (0);
 }
