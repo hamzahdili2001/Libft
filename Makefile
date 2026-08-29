@@ -14,7 +14,7 @@ TEST_DIR    = tests
 OBJ_DIR     = obj
 
 # Add more subfolders here as you add categories (e.g. src/memory, src/stdlib)
-SRC_SUBDIRS = strings
+SRC_SUBDIRS = strings, ctype
 
 SRCS        = $(foreach d,$(SRC_SUBDIRS),$(wildcard $(SRC_DIR)/$(d)/*.c))
 OBJS        = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))

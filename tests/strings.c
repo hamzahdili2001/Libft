@@ -2,22 +2,6 @@
 #include <assert.h>
 #include <string.h>
 
-void	test(char *name, int passed)
-{
-	if (passed)
-	{
-		ft_putstr("✅ ");
-		ft_putstr((char *)name);
-		ft_putchar('\n');
-	}
-	else
-	{
-		ft_putstr("❌ ");
-		ft_putstr((char *)name);
-		ft_putchar('\n');
-	}
-}
-
 int	test_ft_strcpy(char *str)
 {
 	char	buff_1[100];
@@ -224,8 +208,37 @@ int	test_ft_strdup(char *s)
 	return (result);
 }
 
-int	main(void)
+int	test_ft_strncat(const char *s, t_uint n)
 {
+	char	dest1[50] = "Hamza is ";
+	char	dest2[50] = "Hamza is ";
+
+	ft_strncat(dest1, s, n);
+	strncat(dest2, s, n);
+	return (ft_strcmp(dest1, dest2) == 0);
+}
+
+int	test_ft_strlcat(char *initial, char *s, t_uint size)
+{
+	char	dest1[50];
+	char	dest2[50];
+	t_uint	ret1;
+	t_uint	ret2;
+
+	strcpy(dest1, initial);
+	strcpy(dest2, initial);
+	ret1 = ft_strlcat(dest1, s, size);
+	ret2 = strlcat(dest2, s, size);
+	if (strcmp(dest1, dest2) != 0)
+		return (0);
+	return (ret1 == ret2);
+}
+
+void	test_strings(void)
+{
+	ft_putstr("|*-----------------------*|\n");
+	ft_putstr("|* TEST STRING FUNCTIONS *|\n");
+	ft_putstr("|*-----------------------*|\n");
 	/* ft_strlen */
 	ft_putstr(" TEST: [ft_strlen]\n");
 	test("ft_strlen  -> empty", ft_strlen("") == strlen(""));
@@ -388,5 +401,32 @@ int	main(void)
 	test("ft_strdup -> basic", test_ft_strdup("hello world"));
 	test("ft_strdup -> empty string", test_ft_strdup(""));
 	test("ft_strdup -> single char", test_ft_strdup("x"));
-	return (0);
+	/* ft_strncat */
+	ft_putstr(" TEST: [ft_strncat]\n");
+	test("ft_strncat -> basic", test_ft_strncat("cool", 4));
+	test("ft_strncat -> n smaller than src length", test_ft_strncat("cool guy",
+			4));
+	test("ft_strncat -> n larger than src length", test_ft_strncat("cool",
+			100));
+	test("ft_strncat -> n == 0", test_ft_strncat("cool", 0));
+	test("ft_strncat -> empty src", test_ft_strncat("", 5));
+	/* ft_srtlcat */
+	ft_putstr(" TEST: [ft_strlcat]\n");
+	test("ft_strlcat -> fits fully", test_ft_strlcat("hi ", "there", 20));
+	test("ft_strlcat -> truncated mid-src", test_ft_strlcat("hi ", "there", 6));
+	test("ft_strlcat -> dest_len already >= size",
+		test_ft_strlcat("hello world", "x", 5));
+	test("ft_strlcat -> size == 0", test_ft_strlcat("hi", "there", 0));
+	test("ft_strlcat -> exact fit, no truncation", test_ft_strlcat("ab", "cd",
+			5));
+	/* Bonus ft_strnstr */
+	ft_putstr(" TEST: [ft_strnstr]\n");
+	test("ft_strnstr -> found within len", ft_strnstr("hello world", "world",
+			20) == "hello world" + 6);
+	test("ft_strnstr -> found but len cuts it off", ft_strnstr("hello world",
+			"world", 8) == NULL);
+	test("ft_strnstr -> not found", ft_strnstr("hello world", "xyz",
+			20) == NULL);
+	test("ft_strnstr -> match at second position", ft_strnstr("aabc", "abc",
+			10) == "aabc" + 1);
 }
