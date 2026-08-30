@@ -20,4 +20,5 @@ int	main(void)
 {
 	test_strings();
 	test_ctype();
+	test_stdlib();
 }
